@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>BulkTracker</title>
+    <link rel="icon" type="image/png" href="assets/ico.png">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #000;
+            background-image: radial-gradient(#ffffff1e 1px, transparent 1px);
+            background-size: 40px 40px;
+            min-height: 100vh;
+        }
+
+        .blob {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        .blob-1 { top: -100px; left: -100px; background: #542020; }
+        .blob-2 { bottom: -100px; right: -100px; background: #4dff88; }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .metadata {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .metadata h2 {
+            font-weight: 300;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .TrackCircles {
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 30px;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .circle {
+            position: relative;
+            height: 180px;
+            width: 180px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.4s ease;
+        }
+
+        .inner-circle {
+            background-color: #0a0a0a;
+            width: 145px;
+            height: 145px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .inner-circle span {
+            font-size: 1.8rem;
+            display: block;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            height: 40px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            color: white;
+            border-radius: 20px;
+            outline: none;
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        input::-webkit-inner-spin-button {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        input:focus { border-color: #4dff88; }
+
+        button {
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            padding-bottom: 9px;
+        }
+
+        button:active { transform: scale(0.95); }
+
+        .btn1 { background: #4dff88; color: black; padding: 0 20px; }
+        .btn { background: white; color: black; width: 50px; padding-top: 12px; }
+
+        .list-container {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 20px;
+        }
+
+        ul { list-style: none; padding: 0; }
+
+        li {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .delete-btn {
+            background: rgba(255, 77, 116, 0.125);
+            color: rgba(255, 77, 116, 0.786);
+            padding-top: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+        }
+
+        footer {
+            margin-top: auto; 
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            height: 0px;
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="main">
+        <section class="metadata">
+            <h2 id="proGoal">0g Protein</h2>
+            <h2 id="kcalGoal">0kcal</h2>
+        </section>
+    
+        <section class="TrackCircles">
+            <div class="circle-container">
+                <div id="proteinCircle" class="circle">
+                    <div class="inner-circle"><span id="proteinText" style="color: #ff4d4d;">0</span>Prot</div>
+                </div>
+            </div>
+
+            <div class="circle-container">
+                <div id="caloriesCircle" class="circle">
+                    <div class="inner-circle"><span id="caloriesText" style="color: #4dff88;">0</span>kcal</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="input-area" style="margin-top: -10px;">
+            <input type="number" id="foodProt" placeholder="Proteine">
+            <input type="number" style="width: 50px;" id="foodCal" placeholder="kcal">
+            <button class="btn1"onclick="addManual()">Hinzufügen</button>
+        </section>
+
+        <section class="input-area">
+            <input type="text" id="foodName" placeholder="Essen suchen...">
+            <button class="btn" style="height: 40px; width: 40px;" onclick="addFood()"><i class="fi fi-br-search"></i></button>
+        </section>
+
+        <section class="list-container">
+            <h3>Todays Meals</h3>
+            <ul id="mealList"></ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>© Dion Beres.</p>
+    </footer>
+
+    <script>
+        let totalProt = 0;
+        let totalCal = 0;
+        const goalProt = 140;
+        const goalCal = 3000;
+
+        let mealHistory = JSON.parse(localStorage.getItem('meals')) || [];
+
+        window.onload = function() {
+            checkNewDay();
+            initUI();
+        };
+
+        function initUI() {
+            document.getElementById('proGoal').innerText = goalProt + "g Protein";
+            document.getElementById('kcalGoal').innerText = goalCal + " kcal";
+            loadFromDatabase();
+        }
+
+        function checkNewDay() {
+            const heute = new Date().toDateString();
+            const letzterTag = localStorage.getItem('lastDate');
+
+            if (letzterTag !== heute) {
+                mealHistory = [];
+                localStorage.setItem('meals', JSON.stringify([]));
+                localStorage.setItem('lastDate', heute);
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('proteinText').innerText = totalProt;
+            document.getElementById('caloriesText').innerText = totalCal;
+
+            const protPercent = Math.min((totalProt / goalProt) * 360, 360);
+            const calPercent = Math.min((totalCal / goalCal) * 360, 360);
+
+            document.getElementById('proteinCircle').style.background = `conic-gradient(#ff4d4d ${protPercent}deg, #333 0deg)`;
+            document.getElementById('caloriesCircle').style.background = `conic-gradient(#4dff88 ${calPercent}deg, #333 0deg)`;
+            
+            localStorage.setItem('meals', JSON.stringify(mealHistory));
+        }
+
+        function loadFromDatabase() {
+            totalProt = 0;
+            totalCal = 0;
+            document.getElementById('mealList').innerHTML = "";
+            mealHistory.forEach(meal => {
+                renderMealToList(meal.id, meal.time, meal.name, meal.prot, meal.cal);
+                totalProt += meal.prot;
+                totalCal += meal.cal;
+            });
+            updateUI();
+        }
+
+        function renderMealToList(id, time, name, prot, cal) {
+            const li = document.createElement('li');
+            li.setAttribute('data-id', id);
+            li.innerHTML = `
+                <span><strong>${time}</strong> - ${name}: ${prot}g / ${cal}kcal</span>
+                <button class="delete-btn" onclick="removeMeal(this, ${prot}, ${cal})"><i class="fi fi-br-cross"></i></button>
+            `;
+            document.getElementById('mealList').appendChild(li);
+        }
+
+        function addFood() {
+            const nameInput = document.getElementById('foodName').value.toLowerCase().trim();
+            let prot = 0;
+            let cal = 0;
+
+            if (nameInput === "banane") { prot = 1; cal = 96; }
+            else if (nameInput === "apfel") { prot = 1; cal = 52; }
+            else if (nameInput === "birne") { prot = 1; cal = 100; }
+            else if (nameInput === "pfirsich") { prot = 1; cal = 50; }
+            else if (nameInput === "kiwi") { prot = 1; cal = 40; }
+            else if (nameInput === "ei") { prot = 7; cal = 80; }
+            else if (nameInput === "riegel" || nameInput === "protein riegel") { prot = 25; cal = 200; }
+            else if (nameInput === "babybel") { prot = 5; cal = 60; }
+            else if (nameInput === "reiswaffel") { prot = 1; cal = 30; }
+            else { alert("Nicht gefunden!"); return; }
+
+            saveToHistory(nameInput.charAt(0).toUpperCase() + nameInput.slice(1), prot, cal);
+            document.getElementById('foodName').value = "";
+        }
+
+        function addManual() {
+            const p = parseInt(document.getElementById('foodProt').value) || 0;
+            const c = parseInt(document.getElementById('foodCal').value) || 0;
+            if (p === 0 && c === 0) return;
+            saveToHistory("Manuell", p, c);
+            document.getElementById('foodProt').value = "";
+            document.getElementById('foodCal').value = "";
+        }
+
+        function saveToHistory(name, prot, cal) {
+            const jetzt = new Date();
+            const time = jetzt.getHours() + ":" + jetzt.getMinutes().toString().padStart(2, '0');
+            const id = Date.now();
+
+            const meal = { id, time, name, prot, cal };
+            mealHistory.push(meal);
+            
+            totalProt += prot;
+            totalCal += cal;
+
+            renderMealToList(id, time, name, prot, cal);
+            updateUI();
+        }
+
+        function removeMeal(btn, p, c) {
+            const li = btn.parentElement;
+            const id = parseInt(li.getAttribute('data-id'));
+            mealHistory = mealHistory.filter(m => m.id !== id);
+            totalProt -= p;
+            totalCal -= c;
+            li.remove();
+            updateUI();
+        }
+    </script>
+</body>
+</html>
