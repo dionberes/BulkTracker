@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>BulkTracker</title>
+    <link rel="icon" type="image/png" href="assets/ico.png">
+    <link rel="stylesheet" href="frontend/style.css">
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+
+    <div class="settings">
+        <section id="settingsframe" class="settingsframe">
+            <div class="settingsheader">
+                <h1 style="margin-top: 10px;">Settings</h1>
+
+                <section class="STTPUpper">
+                    <h2>Protein Goal (g)</h2>
+
+                    <div class="STTP">
+                        <input type="text" id="proGoalInput" placeholder="Protein Goal">  
+                        <button class="btn"onclick="updateStuff()"><i class="fi fi-br-check"></i></button>
+                    </div>
+                </section>
+
+                <section class="STTPUpper">
+                    <h2>Calories Goal</h2>
+
+                    <div class="STTP" >
+                        <input type="text" id="kcalGoalInput" placeholder="Calorie Goal">
+                        <button class="btn"onclick="updateStuff()"><i class="fi fi-br-check"></i></button>
+                    </div>
+                </section>
+                <button class="settingsCloseBtn" onclick="closeSettings()">Close</button>
+            </div>
+        </section>
+
+        <button class="btnSettings" onclick="openSettings()"><i class="fi fi-br-home-settings"></i></button>
+        
+    </div>
+    <div class="main">
+        <section class="metadata">
+            <h2 id="proGoal">0g Protein</h2>
+            <h2 id="kcalGoal">0kcal</h2>
+        </section>
+    
+        <section class="TrackCircles" style="scale: 0.9;">
+            <div class="circle-container">
+                <div id="proteinCircle" class="circle">
+                    <div class="inner-circle"><span id="proteinText" style="color: #Fd005F;">0</span>Prot</div>
+                </div>
+            </div>
+
+            <div class="circle-container">
+                <div id="caloriesCircle" class="circle">
+                    <div class="inner-circle"><span id="caloriesText" style="color: #4dff88;">0</span>kcal</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="input-area" style="margin-top: -10px; ">
+            <input style="width: 50px;" id="foodProt" placeholder="Protein">
+            <input style="width: 50px;" id="foodCal" placeholder="kcal">
+            <button class="btn1"onclick="addManual()">Hinzufügen</button>
+        </section>
+
+        <section class="input-area"style="margin-top: 10px; ">
+            <input type="text" id="foodName" placeholder="Essen suchen...">
+            <button class="btn" style="height: 50px; width: 50px;" onclick="addFood()"><i class="fi fi-br-search"></i></button>
+        </section>
+
+        <section class="list-container">
+            <h3>Todays Meals</h3>
+            <ul id="mealList" class="datas"></ul>
+        </section>
+    </div>
+
+        
+
+    <script src="backend/FoodIndexSaver.js"></script>
+</body>
+</html>
