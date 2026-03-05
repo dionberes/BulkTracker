@@ -12,9 +12,6 @@ function updateStuff() {
     closeSettings();
 }
 
-
-
-
 let goalProt = 140;
 let goalCal = 3000;
 
@@ -22,20 +19,6 @@ let totalProt = 0;
 let totalCal = 0;
 
 let mealHistory = JSON.parse(localStorage.getItem('meals')) || [];
-
-const FoodDatabase = {
-    "banane": { prot: 1, cal: 96 },
-    "apfel": { prot: 1, cal: 52 },
-    "birne": { prot: 1, cal: 100 },
-    "pfirsich": { prot: 1, cal: 50 },
-    "kiwi": { prot: 1, cal: 40 },
-    "ei": { prot: 7, cal: 80 },
-    "riegel": { prot: 25, cal: 200 },
-    "protein riegel": { prot: 25, cal: 200 },
-    "babybel": { prot: 5, cal: 60 },
-    "reiswaffel": { prot: 1, cal: 30 },
-    "waffel": { prot: 1, cal: 30 }
-};
 
 window.onload = function() {
     checkNewDay();
@@ -83,6 +66,7 @@ function loadFromDatabase() {
     totalProt = 0;
     totalCal = 0;
     document.getElementById('mealList').innerHTML = "";
+
     mealHistory.forEach(meal => {
         renderMealToList(meal.id, meal.time, meal.name, meal.prot, meal.cal);
         totalProt += meal.prot;
