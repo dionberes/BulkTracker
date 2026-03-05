@@ -15,7 +15,6 @@ const FoodDatabase = {
     "tomate": { prot: 1.0, cal: 18 },
     "paprika": { prot: 1.3, cal: 31 },
     "spinat": { prot: 2.9, cal: 23 },
-
     "ei": { prot: 13, cal: 155 },
     "hähnchenbrust": { prot: 31, cal: 165 },
     "putenbrust": { prot: 30, cal: 135 },
@@ -23,7 +22,6 @@ const FoodDatabase = {
     "lachs": { prot: 20, cal: 208 },
     "thunfisch": { prot: 26, cal: 116 },
     "tofu": { prot: 8, cal: 76 },
-
     "magerquark": { prot: 12, cal: 67 },
     "skyr": { prot: 11, cal: 63 },
     "hüttenkäse": { prot: 11, cal: 98 },
@@ -31,7 +29,6 @@ const FoodDatabase = {
     "milch": { prot: 3.4, cal: 47 },
     "käse": { prot: 25, cal: 350 },
     "babybel": { prot: 5, cal: 60 },
-
     "reis": { prot: 2.7, cal: 130 },
     "nudeln": { prot: 5, cal: 150 },
     "kartoffeln": { prot: 2, cal: 77 },
@@ -39,17 +36,12 @@ const FoodDatabase = {
     "brot": { prot: 8, cal: 250 },
     "reiswaffel": { prot: 0.7, cal: 35 },
     "waffel": { prot: 0.7, cal: 35 },
-    "quinoa": { prot: 4.4, cal: 120 },
-
-    // Snacks
     "riegel": { prot: 20, cal: 200 },
     "protein riegel": { prot: 20, cal: 200 },
-    "protein shake": { prot: 25, cal: 120 },
+    "protein shake": { prot: 30, cal: 120 },
     "nüsse": { prot: 20, cal: 600 },
     "mandeln": { prot: 21, cal: 575 },
     "erdnussbutter": { prot: 25, cal: 588 },
-
-    // Fastfood
     "pizza": { prot: 35, cal: 1200 },
     "burger": { prot: 12, cal: 350 },
     "döner": { prot: 15, cal: 900 },
