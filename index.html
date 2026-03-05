@@ -53,7 +53,7 @@
         <section class="TrackCircles" style="scale: 0.9;">
             <div class="circle-container">
                 <div id="proteinCircle" class="circle">
-                    <div class="inner-circle"><span id="proteinText" style="color: #Fd005F;">0</span>Prot</div>
+                    <div class="inner-circle"><span id="proteinText" style="color: #Fd005F;">0</span>Protein</div>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
             <button class="btn1"onclick="addManual()">Hinzufügen</button>
         </section>
 
-        <section class="input-area"style="margin-top: 10px; ">
+        <section class="input-area"style="margin-top: 10px;padding-top: 15px; border-top: .5px  solid white; border-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.7), transparent) 1;">
             <input type="text" id="foodName" placeholder="Essen suchen...">
             <button class="btn" style="height: 50px; width: 50px;" onclick="addFood()"><i class="fi fi-br-search"></i></button>
         </section>
@@ -83,6 +83,7 @@
 
         
 
+    <script src="backend/FoodDatabase.js"></script>
     <script src="backend/FoodIndexSaver.js"></script>
 </body>
 </html>
