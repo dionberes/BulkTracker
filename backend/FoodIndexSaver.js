@@ -79,7 +79,7 @@ function renderMealToList(id, time, name, prot, cal) {
     const li = document.createElement('li');
     li.setAttribute('data-id', id);
     li.innerHTML = `
-        <span><strong>${time}</strong> - ${name}: ${prot}g / ${cal}kcal</span>
+        <span class="foodlist"><strong>${time}</strong> - ${name}: ${prot}g / ${cal}kcal</span>
         <button class="delete-btn" onclick="removeMeal(this, ${prot}, ${cal})"><i class="fi fi-br-cross"></i></button>
     `;
     document.getElementById('mealList').appendChild(li);
@@ -87,6 +87,8 @@ function renderMealToList(id, time, name, prot, cal) {
 
 function addFood() {
     const nameInput = document.getElementById('foodName').value.toLowerCase().trim();
+    const dropdown = document.getElementById('dropdown');
+    const grammIn = document.getElementById('grammIn');
 
     let prot = 0;
     let cal = 0;
@@ -94,9 +96,19 @@ function addFood() {
     if (FoodDatabase[nameInput]) {
         prot = FoodDatabase[nameInput].prot;
         cal = FoodDatabase[nameInput].cal;
-    }
 
-    else { alert("Nicht gefunden!"); return; }
+        if (dropdown.value === 'per100g') {
+            const gramm = parseFloat(grammIn.value) || 100;
+            prot = (prot / 100) * gramm;
+            cal = (cal / 100) * gramm;
+            
+            prot = Math.round(prot * 10) / 10;
+            cal = Math.round(cal);
+        }
+    } else {
+        alert("Nicht gefunden!");
+        return;
+    }
 
     saveToHistory(nameInput.charAt(0).toUpperCase() + nameInput.slice(1), prot, cal);
     document.getElementById('foodName').value = "";
