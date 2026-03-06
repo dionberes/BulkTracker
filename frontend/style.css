@@ -238,9 +238,18 @@ li span {
     top: 0;
     left: 0;
     color: white;
-    text-shadow: .5 .5 .5 black;
     height: 100vh;
     width: 100vw;
+}
+.dropdown {
+    background: rgb(238, 238, 238);
+    color: #000000;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    border-radius: 200px;
+    padding: 5px 10px;
+    cursor: pointer;
+    height: 40px;
 }
 
 .settingsCloseBtn {
@@ -305,15 +314,18 @@ li span {
 }
 
 @media (max-width: 700px) {
-    body{
+    .TrackCircles{
         scale: 0.9;
     }
 }
 @media (max-width: 400px) {
     body{
-        scale: 0.8;
+        scale: 0.9;
+        font-size: 12px;
     }
     .circle{
         scale: 0.8;
+    }.TrackCircles{
+        gap: 10px;
     }
 }
