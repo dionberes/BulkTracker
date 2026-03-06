@@ -106,7 +106,7 @@ function addFood() {
             cal = Math.round(cal);
         }
     } else {
-        alert("Nicht gefunden!");
+        alert("404: Food not found!");
         return;
     }
 
