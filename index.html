@@ -46,14 +46,14 @@
     </div>
     <div class="main">
         <section class="metadata">
-            <h2 id="proGoal">0g Protein</h2>
+            <h2 id="proGoal">0 Protein</h2>
             <h2 id="kcalGoal">0kcal</h2>
         </section>
     
         <section class="TrackCircles" style="scale: 0.9;">
             <div class="circle-container">
                 <div id="proteinCircle" class="circle">
-                    <div class="inner-circle"><span id="proteinText" style="color: #Fd005F;">0</span>Protein</div>
+                    <div class="inner-circle"><span id="proteinText" style="color: #Fd005F;">0</span>g Protein</div>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
         </section>
 
         <section class="input-area" style="margin-top: -10px; ">
-            <input style="width: 50px;" id="foodProt" placeholder="Protein">
+            <input style="width: 50px;" id="foodProt" placeholder="g Protein">
             <input style="width: 50px;" id="foodCal" placeholder="kcal">
             <button class="btn1"onclick="addManual()">Hinzufügen</button>
         </section>
@@ -74,6 +74,14 @@
             <input type="text" id="foodName" placeholder="Essen suchen...">
             <button class="btn" style="height: 50px; width: 50px;" onclick="addFood()"><i class="fi fi-br-search"></i></button>
         </section>
+        
+        <section class="input-area" style="margin-top: 10px;">
+            <select id="dropdown" name="menge" class="dropdown">
+                <option value="menge">Ganze</option>
+                <option value="per100g">pro Gramm</option>
+            </select>
+            <input id="grammIn" style="display: none; height: 15px;" value="100"></input>
+        </section>
 
         <section class="list-container">
             <h3>Todays Meals</h3>
@@ -81,9 +89,20 @@
         </section>
     </div>
 
-        
-
     <script src="backend/FoodDatabase.js"></script>
     <script src="backend/FoodIndexSaver.js"></script>
+    <script>
+        function toggleGrammInput() {
+            const dropdown = document.getElementById('dropdown');
+            const grammIn = document.getElementById('grammIn');
+            if (dropdown.value === 'per100g') {
+                grammIn.style.display = 'block';
+            } else {
+                grammIn.style.display = 'none';
+            }
+        }
+
+        document.getElementById('dropdown').addEventListener('change', toggleGrammInput);
+    </script>
 </body>
 </html>
