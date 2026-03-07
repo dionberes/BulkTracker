@@ -313,21 +313,16 @@ li span {
     transition: transform 0.2s ease-in-out;
 }
 
-@media (max-width: 700px) {
-    .TrackCircles{
-        scale: 0.9;
-    }
-}
 @media (max-width: 400px) {
     body{
         font-size: 12px;
-    }
-    .circle{
-        scale: 0.8;
+    }.circle{
+        scale: 0.9;
     }.TrackCircles{
         gap: 10px;
     }
 }
+
 
 @media (min-width: 600px) {
     li{
@@ -342,3 +337,4 @@ li span {
     li{
         margin-left: 40vw;}
 }
+
